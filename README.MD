@@ -36,7 +36,7 @@ This readme will instruct step by step as follows
 5. Communication strategy findings to executives and non-technical stakeholders
 
 
-1. EDA
+**1. EDA through SQLite **
 
 
 
@@ -539,10 +539,10 @@ Finalizing the SQL data cleanup, there are several metrics pending to calculate 
 
 From here exported CSV file to Power BI to clean and transform pending data and model
 
-2. Exported enriched dataset as an excel file and built a glossary page to feed into the last page of the report.
+**2. Exported enriched dataset as an excel file and built a glossary page to feed into the last page of the report.**
 
 
-3. Power BI and DAX calculations. I calculated the majority of the metrics in DAX since it is my best understanding and reliable. The process of every single step is below.
+**3. Power BI and DAX calculations. I calculated the majority of the metrics in DAX since it is my best understanding and reliable. The process of every single step is below.**
 
 
 
@@ -786,11 +786,11 @@ This will ultimately point properties with strong income, high occupancy, compet
 
 From here several visual aids were built with metrics, and a look and feel approach to Walker and Dunlop was built. 
 
-4. The dashboard will be kept current through a simple, warehouse-aligned workflow. A clean ETL process (dataflows or SQL views) will stage and standardize the portfolio data according to Walker & Dunlop conventions, and the published dataset in Power BI Service will run on a scheduled refresh (e.g., monthly), using certified connectors to the enterprise data warehouse. Where appropriate, incremental refresh can be enabled to speed updates.
+**4. The dashboard will be kept current through a simple, warehouse-aligned workflow. A clean ETL process (dataflows or SQL views) will stage and standardize the portfolio data according to Walker & Dunlop conventions, and the published dataset in Power BI Service will run on a scheduled refresh (e.g., monthly), using certified connectors to the enterprise data warehouse. Where appropriate, incremental refresh can be enabled to speed updates.**
 
 Automation will be orchestrated with Power BI Service and, if desired, Power Automate to trigger refreshes and send success/failure notifications. Basic data-quality checks (e.g., row counts and required fields like NOI/LTV) and a brief change log will be maintained to ensure trust. The result is a low-touch, reliable update cycle that keeps the dashboard usable and up-to-date without manual effort.
 
-5. This dashboard is designed to be intuitive and self-explanatory for non-technical audiences, using plain language, clear visuals, and concise on-screen definitions. In reviews with executives, we’ll lead with a short narrative of key movements and outliers, then allow guided exploration through simple filters and labeled KPIs so insights are immediately actionable.
+**5. This dashboard is designed to be intuitive and self-explanatory for non-technical audiences, using plain language, clear visuals, and concise on-screen definitions. In reviews with executives, we’ll lead with a short narrative of key movements and outliers, then allow guided exploration through simple filters and labeled KPIs so insights are immediately actionable.**
 
 On a monthly cadence, we’ll present updates, briefly explain any metric changes, and gather feedback. Borrowing from BABOK practices, we’ll capture insights from multiple sources (reviews, comments, quick interviews) and iterate the dashboard to reflect evolving needs keeping the experience consistent while continuously improving clarity and decision usefulness. 
 
