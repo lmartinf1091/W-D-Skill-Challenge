@@ -36,7 +36,7 @@ This readme will instruct step by step as follows
 5. Communication strategy findings to executives and non-technical stakeholders
 
 
-**1. EDA through SQLite **
+**1. EDA through SQLite**
 
 
 
