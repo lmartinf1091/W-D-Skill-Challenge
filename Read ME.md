@@ -41,7 +41,7 @@ This readme will instruct step by step as follows
 
 
 SQL Scripts
-#1 /* View data in property_dataset_sample.csv*/
+#1 View data in property_dataset_sample.csv
 
 	SELECT 
 	  *
@@ -49,7 +49,7 @@ SQL Scripts
 	property_dataset_sample
 
 
-#2/*View data in Dempographics_us.csv*/
+#2 View data in Dempographics_us.csv
 
 	SELECT 
 	*
@@ -57,7 +57,7 @@ SQL Scripts
 	FROM 
 	demographics_US
 	
-	#3/*View data in states_codes_mapping.csv*/
+#3 View data in states_codes_mapping.csv
 	
 	SELECT 
 	*
@@ -65,12 +65,12 @@ SQL Scripts
 	FROM 
 	states_codes_mapping
 
-#4/*property_dataset_sample Inspection of Data*/
+#4 Property_dataset_sample Inspection of Data
 
 
 	PRAGMA table_info(property_dataset_sample)
 
-#5/*Create table from property_dataset_sample.csv with column name changes*/
+#5 Create table from property_dataset_sample.csv with column name changes
 
 	CREATE TABLE property_sample_clean_1 AS
 	SELECT
@@ -175,10 +175,10 @@ SQL Scripts
 	    "latitude" AS "Latitude",
 	    "longitude" AS "Longitude"
 	
-	FROM 
-	property_dataset_sample
+		FROM 
+		property_dataset_sample
 	
-	#6 /*Identify duplicate Values*/
+#6  Identify duplicate Values
 	
 	SELECT 
 	    "property name",
@@ -196,7 +196,7 @@ SQL Scripts
 	    "zip code"
 	HAVING COUNT(*) > 1;
 
-#7/*Create Demographics Enriched table from demographics_US table and states_codes_mapping*/
+#7 Create Demographics Enriched table from demographics_US table and states_codes_mapping
 
 	CREATE TABLE demographics_enriched AS
 	SELECT
@@ -207,7 +207,7 @@ SQL Scripts
 	LEFT JOIN states_codes_mapping AS s
 	    ON d.state_code = s.adm_1_code;
 	
-	#8/*Property dataset sample Enriched table*/
+#8 Property dataset sample Enriched table
 	
 	CREATE TABLE property_dataset_sample_enriched_time AS 
 	SELECT
@@ -217,7 +217,7 @@ SQL Scripts
 	LEFT JOIN demographics_enriched AS d
 	    ON p.[Property State]= d.adm_1_code_letters;
 	
-	#9/*Removing hour from date columns Standardizing YYYY/MM/DD*/
+#9 Removing hour from date columns Standardizing YYYY/MM/DD
 	
 	UPDATE property_dataset_sample_enriched_time
 	SET "Occupancy As Of Date" = REPLACE(substr("Occupancy As Of Date", 1, 10), '/', '-')
@@ -263,7 +263,7 @@ SQL Scripts
 	SET "First Interest Adjustment Date In Trust" = REPLACE(substr("First Interest Adjustment Date In Trust", 1, 10), '/', '-')
 	WHERE "First Interest Adjustment Date In Trust" LIKE '____%__%__%';
 
-#10 /*Checking removed hours*/
+#10 Checking removed hours
 
 	SELECT *
 	FROM property_dataset_sample_enriched_time
@@ -278,7 +278,7 @@ SQL Scripts
     	OR "3rd Most Recent Financial End Date" LIKE '____-__-__ __:__:%'
     	OR "First Interest Adjustment Date In Trust" LIKE '____-__-__ __:__:%';
 
-#11/* Riviera specific case, changing two date values that were not being executed*/
+#11 Riviera specific case, changing two date values that were not being executed
 
 	UPDATE property_dataset_sample_enriched_time
 	SET 
@@ -288,7 +288,7 @@ SQL Scripts
     	TRIM("Most Recent Financial End Date") LIKE '%1/31/2023%'
     	AND TRIM("2nd Most Recent Financial End Date") LIKE '%9/30/2022%'
 
-#12/*Summary statistics of most important numeric fields*/
+#12 Summary statistics of most important numeric fields
 	
  	SELECT
     	COUNT(*) AS total_rows,	
@@ -335,7 +335,7 @@ SQL Scripts
     CASE 
         WHEN "Year Built" GLOB '[0-9]*' THEN CAST("Year Built" AS INTEGER)
     END
-) AS avg_year_built,
+	) AS avg_year_built,
 
     -- Year Renovated
     MIN("Year Renovated") AS min_year_renovated,
@@ -358,11 +358,9 @@ SQL Scripts
   	AND "Most Recent NOI" IS NOT NULL
   	AND "Most Recent NOI" GLOB '[0-9.-]*';
 
-FROM property_dataset_sample_enriched_time;
+	FROM property_dataset_sample_enriched_time;
 
-#12 Identifying nulls:
-	
-/* This query is used to overview columns and evaluate which columns may be dropped, kept or caclulated cleaning purposes*/
+#12 Identifying nulls: This query is used to overview columns and evaluate which columns may be dropped, kept or caclulated cleaning purposes
 
 	SELECT
     SUM(CASE WHEN TRIM("Number Of Properties") IS NULL OR TRIM("Number Of Properties") = '' THEN 1 ELSE 0 END) AS "Number Of Properties Nulls",
@@ -522,7 +520,7 @@ FROM property_dataset_sample_enriched_time;
     SUM(CASE WHEN TRIM("families_total_count") IS NULL OR TRIM("families_total_count") = '' THEN 1 ELSE 0 END) AS "families_total_count Nulls",
     SUM(CASE WHEN TRIM("state_name") IS NULL OR TRIM("state_name") = '' THEN 1 ELSE 0 END) AS "state_name Nulls",
     SUM(CASE WHEN TRIM("adm_1_code_letters") IS NULL OR TRIM("adm_1_code_letters") = '' THEN 1 ELSE 0 END) AS "adm_1_code_letters Nulls"
-FROM property_dataset_sample_enriched_time;
+	FROM property_dataset_sample_enriched_time;
 
 #13. Noted critical nulls in maturity ltv and cut-off date ltv mainly, 109 for each. These values will be calculated in Power BI.
 
@@ -544,7 +542,7 @@ From here exported CSV file to Power BI to clean and transform pending data and 
 2. Exported enriched dataset as an excel file and built a glossary page to feed into the last page of the report.
 
 
-3. Power BI and DAX calculations. I have calculated the majority of the metrics in DAX since it is my best understanding and reliable. The process of every single step is below.
+3. Power BI and DAX calculations. I calculated the majority of the metrics in DAX since it is my best understanding and reliable. The process of every single step is below.
 
 
 
@@ -614,7 +612,7 @@ From here exported CSV file to Power BI to clean and transform pending data and 
     ,
     DESC,
     Dense
-)
+	)
 
 #11 Calculate Rent % Difference from State Median Rent in DAX, created new column on Table view and constructed the DAX formula, this metric calculates how far above or below the property’s rent is compared to the median rent in its state.To assess pricing competitiveness, I calculated each property’s rent difference from the state median. This shows how over or underpriced the rent is in its local context a key signal for risk or opportunity.
 Rent % Difference from State Median Rent:
@@ -683,24 +681,25 @@ Rent % Difference from State Median Rent:
 From here I have proposed two metrics that can give further insights into the best return on invetment considering different metrics:
 
 
-#15 Proposal: Create an Operational Performance ROI metric that combines the property’s core earning strength (Cap Rate and Occupancy %) with two strategic adjustments for rent competitiveness and affordability. This ensures the metric reflects not only how profitable the property is, but also how it’s positioned in the market for sustainable performance. 
+#15 Proposal: Create an Operational Performance ROI metric that combines the property’s core earning strength (Cap Rate and Occupancy %) with two strategic adjustments for rent competitiveness and affordability. This ensures the metric reflects not only how profitable the property is, but also how it’s positioned in the market for sustainable performance.:
 
-Operational ROI =
-[Cap Rate] * [Occupancy %] *
-(1 + MIN(0.10, MAX(-0.10, - [Rent % Difference from State Median Rent]))) *
-(1 + MIN(0.10, MAX(-0.10, 0.30 - [Rent Affordability Ratio])))
+ 	Operational ROI =
+		[Cap Rate] * [Occupancy %] *
+		(1 + MIN(0.10, MAX(-0.10, - [Rent % Difference from State Median Rent]))) *
+		(1 + MIN(0.10, MAX(-0.10, 0.30 - [Rent Affordability Ratio])))
 
 I will divide the formula in 3 parts to explain the logic behind now:
 
-	a. Base Performance: Cap Rate × Occupancy %
+a. Base Performance: Cap Rate × Occupancy %
 
 		Cap Rate = Net Operating Income ÷ Property Value.
 		Occupancy % = proportion of units currently leased (stability measure).
 
 		Multiplying them scales profitability by actual utilization — a property with a high cap rate but low occupancy will score lower.
 
-	b. Market Competitiveness Adjustment: 1 + MIN(0.10, MAX(-0.10, - [Rent % Difference from State Median Rent])))
-
+b. Market Competitiveness Adjustment: 
+		
+   			1 + MIN(0.10, MAX(-0.10, - [Rent % Difference from State Median Rent])))
 			Rent % Difference from State Median Rent measures how far property rent deviates from the state median (positive = higher rent, negative = lower rent).
 
 			I invert the sign with - so that: Lower than median rents (negative differences) become positive boosts. Higher-than-median rents become negative penalties. MAX(-0.10, …) limits penalties so they don’t 				exceed -10%. MIN(0.10, …) limits boosts to +10%.
@@ -711,7 +710,7 @@ I will divide the formula in 3 parts to explain the logic behind now:
 
 				-0.07 → ROI × 0.93 = 7% reduction.
 
-	c. Affordability Adjustment: (1 + MIN(0.10, MAX(-0.10, 0.30 - [Rent Affordability Ratio])))
+c. Affordability Adjustment: (1 + MIN(0.10, MAX(-0.10, 0.30 - [Rent Affordability Ratio])))
 			
 			Rent Affordability Ratio = Monthly Rent ÷ Median Monthly Household Income.
 
@@ -724,14 +723,6 @@ I will divide the formula in 3 parts to explain the logic behind now:
 			(1 + adjustment) applies the result proportionally to the ROI.
 
 This will ultimately point properties with strong income, high occupancy, competitive rent, and good affordability rise to the top. However to keep a fair analysis overpriced or unaffordable properties get penalized, but never by more than 10% per factor. The formula stays easy to understand and the reasoning behind.
-
-
-MAX('Property Dataset Sample Enriched Export'[Cap Rate]
-    - 'Property Dataset Sample Enriched Export'[Net Mortgage Interest Rate],)
-* 'Property Dataset Sample Enriched Export'[Occupancy %]
-* ( 1+ MIN( 0.10, MAX(-0.10,- 'Property Dataset Sample Enriched Export'[Rent % Difference from State Median Rent])))
-* ( 1+ MIN( 0.10, MAX(-0.10,0.30 - 'Property Dataset Sample Enriched Export'[Rent Affordability Ratio] ))
-  )
 
 #16. Proposal: Create a ROI mortgage adjusted metric that combines the property’s core earning strength (Cap Rate and Occupancy %) with two strategic adjustments for rent competitiveness and affordability. This ensures the metric reflects not only how profitable the property is, but also how it’s positioned in the market for sustainable performance. Then substracts leverage costs to have a realistic view when financing a property.
 
@@ -751,14 +742,14 @@ ROI Mortgage Adjusted :
 
 I will divide the formula in 4 parts to explain the logic behind now:
 
-	a. Base Performance: Cap Rate × Occupancy %
+a. Base Performance: Cap Rate × Occupancy %
 
 		Cap Rate = Net Operating Income ÷ Property Value.
 		Occupancy % = proportion of units currently leased (stability measure).
 
 		Multiplying them scales profitability by actual utilization — a property with a high cap rate but low occupancy will score lower.
 
-	b. Market Competitiveness Adjustment: 1 + MIN(0.10, MAX(-0.10, - [Rent % Difference from State Median Rent])))
+b. Market Competitiveness Adjustment: 1 + MIN(0.10, MAX(-0.10, - [Rent % Difference from State Median Rent])))
 
 			Rent % Difference from State Median Rent measures how far property rent deviates from the state median (positive = higher rent, negative = lower rent).
 
@@ -770,7 +761,7 @@ I will divide the formula in 4 parts to explain the logic behind now:
 
 				-0.07 → ROI × 0.93 = 7% reduction.
 
-	c. Affordability Adjustment: (1 + MIN(0.10, MAX(-0.10, 0.30 - [Rent Affordability Ratio])))
+c. Affordability Adjustment: (1 + MIN(0.10, MAX(-0.10, 0.30 - [Rent Affordability Ratio])))
 			
 			Rent Affordability Ratio = Monthly Rent ÷ Median Monthly Household Income.
 
@@ -782,9 +773,14 @@ I will divide the formula in 4 parts to explain the logic behind now:
 
 			(1 + adjustment) applies the result proportionally to the ROI.
 
-	d. Leverage applied:'Property Dataset Sample Enriched Export'[Net Mortgage Interest Rate] *'Property Dataset Sample Enriched Export'[Complete Cut-off date ltv]
-			This will apply the leverage costs substract at the end of the formula by calculating the product of the ltv and the Net mortgage interest rate. 
-This way we can 	have a realistic view of a leveraged ROI
+d. Leverage applied:	
+
+ 
+ 	'Property Dataset Sample Enriched Export'[Net Mortgage Interest Rate] *'Property Dataset Sample Enriched Export'[Complete Cut-off date ltv]
+ 
+This will apply the leverage costs substract at the end of the formula by calculating the product of the ltv and the Net mortgage interest rate. 
+   
+This way we can have a realistic view of a leveraged ROI.
 
 This will ultimately point properties with strong income, high occupancy, competitive rent, good affordability, and discounting leverage costs to rise to the top. This analysis gives a fair view to stakeholders as to a leveraged perspective of the properties.
 
