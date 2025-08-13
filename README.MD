@@ -590,7 +590,7 @@ From here exported CSV file to Power BI to clean and transform pending data and 
 
 	= Table.TransformColumnTypes(#"Cap Rate Calculate",{{"Cap Rate", Percentage.Type}})
 
-#11. Created Full maturity ltv in Power BI column. Since there is only one appraised value date, for the purpose of this excercise I will use the same. maturity ltv= maturity balance/appraised value
+#11. Created Full maturity ltv in Power BI column. Since there is only one appraised value date, for the purpose of this excercise I will use the same.
 
 	= Table.AddColumn(#"Complete Cut-off date ltv", "Complete maturity ltv", each [Maturity Balance]/[Appraised Value])
 
