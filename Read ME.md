@@ -43,254 +43,255 @@ This readme will instruct step by step as follows
 SQL Scripts
 #1 /* View data in property_dataset_sample.csv*/
 
-SELECT 
-  *
-FROM 
-property_dataset_sample
+	SELECT 
+	  *
+	FROM 
+	property_dataset_sample
 
 
 #2/*View data in Dempographics_us.csv*/
-SELECT 
-*
 
-FROM 
-demographics_US
-
-#3/*View data in states_codes_mapping.csv*/
-
-SELECT 
-*
-
-FROM 
-states_codes_mapping
+	SELECT 
+	*
+	
+	FROM 
+	demographics_US
+	
+	#3/*View data in states_codes_mapping.csv*/
+	
+	SELECT 
+	*
+	
+	FROM 
+	states_codes_mapping
 
 #4/*property_dataset_sample Inspection of Data*/
 
 
-PRAGMA table_info(property_dataset_sample)
+	PRAGMA table_info(property_dataset_sample)
 
 #5/*Create table from property_dataset_sample.csv with column name changes*/
 
-CREATE TABLE property_sample_clean_1 AS
-SELECT
-    "number of properties" AS "Number Of Properties",
-    "property name" AS "Property Name",
-    "originator" AS "Originator",
-    "street address" AS "Street Address",
-    "property city" AS "Property City",
-    "property state" AS "Property State",
-    "zip code" AS "Zip Code",
-    "county" AS "County",
-    "property type" AS "Property Type",
-    "property subtype" AS "Property Subtype",
-    "year built" AS "Year Built",
-    "year renovated" AS "Year Renovated",
-    "total units" AS "Total Units",
-    "cut-off date balanceunit" AS "Cut-off Date Balanceunit",
-    "unit of measure" AS "Unit Of Measure",
-    "occupancy %" AS "Occupancy %",
-    "occupancy as of date" AS "Occupancy As Of Date",
-    "loan purpose (acquisition, refinance)" AS "Loan Purpose (acquisition, Refinance)",
-    "payment date" AS "Payment Date",
-    "late charge grace period" AS "Late Charge Grace Period",
-    "note date" AS "Note Date",
-    "first payment date" AS "First Payment Date",
-    "maturity date" AS "Maturity Date",
-    "original loan amount" AS "Original Loan Amount",
-    "cut-off date loan amount" AS "Cut-off Date Loan Amount",
-    "maturity balance" AS "Maturity Balance",
-    "gross interest rate" AS "Gross Interest Rate",
-    "net mortgage interest rate" AS "Net Mortgage Interest Rate",
-    "accrual basis" AS "Accrual Basis",
-    "loan amortization type" AS "Loan Amortization Type",
-    "monthly debt service amount (amortizing)" AS "Monthly Debt Service Amount (amortizing)",
-    "amortization term (original)" AS "Amortization Term (original)",
-    "amortization term (remaining)" AS "Amortization Term (remaining)",
-    "loan term (original)" AS "Loan Term (original)",
-    "loan term (remaining)" AS "Loan Term (remaining)",
-    "io period" AS "Io Period",
-    "seasoning" AS "Seasoning",
-    "prepayment provision" AS "Prepayment Provision",
-    "appraisal valuation date" AS "Appraisal Valuation Date",
-    "appraised value" AS "Appraised Value",
-    "cut-off date ltv" AS "Cut-off Date Ltv",
-    "maturity ltv" AS "Maturity Ltv",
-    "uw ncf dscr" AS "Uw Ncf Dscr",
-    "uw ncf dscr (io)" AS "Uw Ncf Dscr (io)",
-    "uw egi" AS "Uw Egi",
-    "uw expenses" AS "Uw Expenses",
-    "uw noi" AS "Uw Noi",
-    "uw ncf" AS "Uw Ncf",
-    "most recent financial end date" AS "Most Recent Financial End Date",
-    "most recent egi" AS "Most Recent Egi",
-    "most recent expenses" AS "Most Recent Expenses",
-    "most recent noi" AS "Most Recent Noi",
-    "most recent ncf" AS "Most Recent Ncf",
-    "2nd most recent financial end date" AS "2nd Most Recent Financial End Date",
-    "2nd most recent egi" AS "2nd Most Recent Egi",
-    "2nd most recent expenses" AS "2nd Most Recent Expenses",
-    "2nd most recent noi" AS "2nd Most Recent Noi",
-    "2nd most recent ncf" AS "2nd Most Recent Ncf",
-    "3rd most recent financial end date" AS "3rd Most Recent Financial End Date",
-    "3rd most recent egi" AS "3rd Most Recent Egi",
-    "3rd most recent expenses" AS "3rd Most Recent Expenses",
-    "3rd most recent noi" AS "3rd Most Recent Noi",
-    "3rd most recent ncf" AS "3rd Most Recent Ncf",
-    "lien position" AS "Lien Position",
-    "title vesting (feeleaseholdboth)" AS "Title Vesting (feeleaseholdboth)",
-    "tax escrow (monthly)" AS "Tax Escrow (monthly)",
-    "insurance escrow (monthly)" AS "Insurance Escrow (monthly)",
-    "replacement reserve (monthly)" AS "Replacement Reserve (monthly)",
-    "monthly rent per unit" AS "Monthly Rent Per Unit",
-    "secondary financing in place (existing) (yesno)" AS "Secondary Financing In Place (existing) (yesno)",
-    "future supplemental financing description" AS "Future Supplemental Financing Description",
-    "loan no property no" AS "Loan No Property No",
-    "related borrower loans" AS "Related Borrower Loans",
-    "% of cut-off date pool balance" AS "% Of Cut-off Date Pool Balance",
-    "springing reserve type" AS "Springing Reserve Type",
-    "springing reserve amount" AS "Springing Reserve Amount",
-    "deal_name" AS "Deal Name",
-    "interest adjustment period (months)" AS "Interest Adjustment Period (months)",
-    "first interest adjustment date in trust" AS "First Interest Adjustment Date In Trust",
-    "rate index" AS "Rate Index",
-    "margin" AS "Margin",
-    "rate rounding methodology" AS "Rate Rounding Methodology",
-    "interest accrual period day of month (startend)" AS "Interest Accrual Period Day Of Month (startend)",
-    "monthly debt service amount (io)" AS "Monthly Debt Service Amount (io)",
-    "monthly debt service amount (at cap)" AS "Monthly Debt Service Amount (at Cap)",
-    "seismic insurance if pml >= 20% (yesno)" AS "Seismic Insurance If Pml >= 20% (yesno)",
-    "additional financing in place (existing) (yesno)" AS "Additional Financing In Place (existing) (yesno)",
-    "future supplemental financing (yesno)" AS "Future Supplemental Financing (yesno)",
-    "low income units" AS "Low Income Units",
-    "very low income units" AS "Very Low Income Units",
-    "loan group" AS "Loan Group",
-    "entity type" AS "Entity Type",
-    "borrower type" AS "Borrower Type",
-    "balance after fixed rate period" AS "Balance After Fixed Rate Period",
-    "maximum interest adjustment (lifetime)" AS "Maximum Interest Adjustment (lifetime)",
-    "zoning status" AS "Zoning Status",
-    "title vesting (feeleasehold)" AS "Title Vesting (feeleasehold)",
-    "administration fee rate" AS "Administration Fee Rate",
-    "latitude" AS "Latitude",
-    "longitude" AS "Longitude"
-
-FROM 
-property_dataset_sample
-
-#6 /*Identify duplicate Values*/
-
-SELECT 
-    "property name",
-    "street address",
-    "property city",
-    "property state",
-    "zip code",
-    COUNT(*) AS record_count
-FROM property_sample_clean_1
-GROUP BY 
-    "property name",
-    "street address",
-    "property city",
-    "property state",
-    "zip code"
-HAVING COUNT(*) > 1;
+	CREATE TABLE property_sample_clean_1 AS
+	SELECT
+	    "number of properties" AS "Number Of Properties",
+	    "property name" AS "Property Name",
+	    "originator" AS "Originator",
+	    "street address" AS "Street Address",
+	    "property city" AS "Property City",
+	    "property state" AS "Property State",
+	    "zip code" AS "Zip Code",
+	    "county" AS "County",
+	    "property type" AS "Property Type",
+	    "property subtype" AS "Property Subtype",
+	    "year built" AS "Year Built",
+	    "year renovated" AS "Year Renovated",
+	    "total units" AS "Total Units",
+	    "cut-off date balanceunit" AS "Cut-off Date Balanceunit",
+	    "unit of measure" AS "Unit Of Measure",
+	    "occupancy %" AS "Occupancy %",
+	    "occupancy as of date" AS "Occupancy As Of Date",
+	    "loan purpose (acquisition, refinance)" AS "Loan Purpose (acquisition, Refinance)",
+	    "payment date" AS "Payment Date",
+	    "late charge grace period" AS "Late Charge Grace Period",
+	    "note date" AS "Note Date",
+	    "first payment date" AS "First Payment Date",
+	    "maturity date" AS "Maturity Date",
+	    "original loan amount" AS "Original Loan Amount",
+	    "cut-off date loan amount" AS "Cut-off Date Loan Amount",
+	    "maturity balance" AS "Maturity Balance",
+	    "gross interest rate" AS "Gross Interest Rate",
+	    "net mortgage interest rate" AS "Net Mortgage Interest Rate",
+	    "accrual basis" AS "Accrual Basis",
+	    "loan amortization type" AS "Loan Amortization Type",
+	    "monthly debt service amount (amortizing)" AS "Monthly Debt Service Amount (amortizing)",
+	    "amortization term (original)" AS "Amortization Term (original)",
+	    "amortization term (remaining)" AS "Amortization Term (remaining)",
+	    "loan term (original)" AS "Loan Term (original)",
+	    "loan term (remaining)" AS "Loan Term (remaining)",
+	    "io period" AS "Io Period",
+	    "seasoning" AS "Seasoning",
+	    "prepayment provision" AS "Prepayment Provision",
+	    "appraisal valuation date" AS "Appraisal Valuation Date",
+	    "appraised value" AS "Appraised Value",
+	    "cut-off date ltv" AS "Cut-off Date Ltv",
+	    "maturity ltv" AS "Maturity Ltv",
+	    "uw ncf dscr" AS "Uw Ncf Dscr",
+	    "uw ncf dscr (io)" AS "Uw Ncf Dscr (io)",
+	    "uw egi" AS "Uw Egi",
+	    "uw expenses" AS "Uw Expenses",
+	    "uw noi" AS "Uw Noi",
+	    "uw ncf" AS "Uw Ncf",
+	    "most recent financial end date" AS "Most Recent Financial End Date",
+	    "most recent egi" AS "Most Recent Egi",
+	    "most recent expenses" AS "Most Recent Expenses",
+	    "most recent noi" AS "Most Recent Noi",
+	    "most recent ncf" AS "Most Recent Ncf",
+	    "2nd most recent financial end date" AS "2nd Most Recent Financial End Date",
+	    "2nd most recent egi" AS "2nd Most Recent Egi",
+	    "2nd most recent expenses" AS "2nd Most Recent Expenses",
+	    "2nd most recent noi" AS "2nd Most Recent Noi",
+	    "2nd most recent ncf" AS "2nd Most Recent Ncf",
+	    "3rd most recent financial end date" AS "3rd Most Recent Financial End Date",
+	    "3rd most recent egi" AS "3rd Most Recent Egi",
+	    "3rd most recent expenses" AS "3rd Most Recent Expenses",
+	    "3rd most recent noi" AS "3rd Most Recent Noi",
+	    "3rd most recent ncf" AS "3rd Most Recent Ncf",
+	    "lien position" AS "Lien Position",
+	    "title vesting (feeleaseholdboth)" AS "Title Vesting (feeleaseholdboth)",
+	    "tax escrow (monthly)" AS "Tax Escrow (monthly)",
+	    "insurance escrow (monthly)" AS "Insurance Escrow (monthly)",
+	    "replacement reserve (monthly)" AS "Replacement Reserve (monthly)",
+	    "monthly rent per unit" AS "Monthly Rent Per Unit",
+	    "secondary financing in place (existing) (yesno)" AS "Secondary Financing In Place (existing) (yesno)",
+	    "future supplemental financing description" AS "Future Supplemental Financing Description",
+	    "loan no property no" AS "Loan No Property No",
+	    "related borrower loans" AS "Related Borrower Loans",
+	    "% of cut-off date pool balance" AS "% Of Cut-off Date Pool Balance",
+	    "springing reserve type" AS "Springing Reserve Type",
+	    "springing reserve amount" AS "Springing Reserve Amount",
+	    "deal_name" AS "Deal Name",
+	    "interest adjustment period (months)" AS "Interest Adjustment Period (months)",
+	    "first interest adjustment date in trust" AS "First Interest Adjustment Date In Trust",
+	    "rate index" AS "Rate Index",
+	    "margin" AS "Margin",
+	    "rate rounding methodology" AS "Rate Rounding Methodology",
+	    "interest accrual period day of month (startend)" AS "Interest Accrual Period Day Of Month (startend)",
+	    "monthly debt service amount (io)" AS "Monthly Debt Service Amount (io)",
+	    "monthly debt service amount (at cap)" AS "Monthly Debt Service Amount (at Cap)",
+	    "seismic insurance if pml >= 20% (yesno)" AS "Seismic Insurance If Pml >= 20% (yesno)",
+	    "additional financing in place (existing) (yesno)" AS "Additional Financing In Place (existing) (yesno)",
+	    "future supplemental financing (yesno)" AS "Future Supplemental Financing (yesno)",
+	    "low income units" AS "Low Income Units",
+	    "very low income units" AS "Very Low Income Units",
+	    "loan group" AS "Loan Group",
+	    "entity type" AS "Entity Type",
+	    "borrower type" AS "Borrower Type",
+	    "balance after fixed rate period" AS "Balance After Fixed Rate Period",
+	    "maximum interest adjustment (lifetime)" AS "Maximum Interest Adjustment (lifetime)",
+	    "zoning status" AS "Zoning Status",
+	    "title vesting (feeleasehold)" AS "Title Vesting (feeleasehold)",
+	    "administration fee rate" AS "Administration Fee Rate",
+	    "latitude" AS "Latitude",
+	    "longitude" AS "Longitude"
+	
+	FROM 
+	property_dataset_sample
+	
+	#6 /*Identify duplicate Values*/
+	
+	SELECT 
+	    "property name",
+	    "street address",
+	    "property city",
+	    "property state",
+	    "zip code",
+	    COUNT(*) AS record_count
+	FROM property_sample_clean_1
+	GROUP BY 
+	    "property name",
+	    "street address",
+	    "property city",
+	    "property state",
+	    "zip code"
+	HAVING COUNT(*) > 1;
 
 #7/*Create Demographics Enriched table from demographics_US table and states_codes_mapping*/
 
-CREATE TABLE demographics_enriched AS
-SELECT
+	CREATE TABLE demographics_enriched AS
+	SELECT
     d.*,
     s.state_name,
 	s.adm_1_code_letters
-FROM demographics_us AS d
-LEFT JOIN states_codes_mapping AS s
-    ON d.state_code = s.adm_1_code;
-
-#8/*Property dataset sample Enriched table*/
-
-CREATE TABLE property_dataset_sample_enriched_time AS 
-SELECT
-    p.*,        
-    d.*        
-FROM property_sample_clean_1 AS p
-LEFT JOIN demographics_enriched AS d
-    ON p.[Property State]= d.adm_1_code_letters;
-
-#9/*Removing hour from date columns Standardizing YYYY/MM/DD*/
-
-UPDATE property_dataset_sample_enriched_time
-SET "Occupancy As Of Date" = REPLACE(substr("Occupancy As Of Date", 1, 10), '/', '-')
-WHERE "Occupancy As Of Date" LIKE '____%__%__%';
-
-
-UPDATE property_dataset_sample_enriched_time
-SET "Note Date" = REPLACE(substr("Note Date", 1, 10), '/', '-')
-WHERE "Note Date" LIKE '____%__%__%';
-
-
-UPDATE property_dataset_sample_enriched_time
-SET "First Payment Date" = REPLACE(substr("First Payment Date", 1, 10), '/', '-')
-WHERE "First Payment Date" LIKE '____%__%__%';
-
-
-UPDATE property_dataset_sample_enriched_time
-SET "Maturity Date" = REPLACE(substr("Maturity Date", 1, 10), '/', '-')
-WHERE "Maturity Date" LIKE '____%__%__%';
-
-
-UPDATE property_dataset_sample_enriched_time
-SET "Appraisal Valuation Date" = REPLACE(substr("Appraisal Valuation Date", 1, 10), '/', '-')
-WHERE "Appraisal Valuation Date" LIKE '____%__%__%';
-
-
-UPDATE property_dataset_sample_enriched_time
-SET "Most Recent Financial End Date" = REPLACE(substr("Most Recent Financial End Date", 1, 10), '/', '-')
-WHERE "Most Recent Financial End Date" LIKE '____%__%__%';
-
-
-UPDATE property_dataset_sample_enriched_time
-SET "2nd Most Recent Financial End Date" = REPLACE(substr("2nd Most Recent Financial End Date", 1, 10), '/', '-')
-WHERE "2nd Most Recent Financial End Date" LIKE '____%__%__%';
-
-
-UPDATE property_dataset_sample_enriched_time
-SET "3rd Most Recent Financial End Date" = REPLACE(substr("3rd Most Recent Financial End Date", 1, 10), '/', '-')
-WHERE "3rd Most Recent Financial End Date" LIKE '____%__%__%';
-
-
-UPDATE property_dataset_sample_enriched_time
-SET "First Interest Adjustment Date In Trust" = REPLACE(substr("First Interest Adjustment Date In Trust", 1, 10), '/', '-')
-WHERE "First Interest Adjustment Date In Trust" LIKE '____%__%__%';
+	FROM demographics_us AS d
+	LEFT JOIN states_codes_mapping AS s
+	    ON d.state_code = s.adm_1_code;
+	
+	#8/*Property dataset sample Enriched table*/
+	
+	CREATE TABLE property_dataset_sample_enriched_time AS 
+	SELECT
+	    p.*,        
+	    d.*        
+	FROM property_sample_clean_1 AS p
+	LEFT JOIN demographics_enriched AS d
+	    ON p.[Property State]= d.adm_1_code_letters;
+	
+	#9/*Removing hour from date columns Standardizing YYYY/MM/DD*/
+	
+	UPDATE property_dataset_sample_enriched_time
+	SET "Occupancy As Of Date" = REPLACE(substr("Occupancy As Of Date", 1, 10), '/', '-')
+	WHERE "Occupancy As Of Date" LIKE '____%__%__%';
+	
+	
+	UPDATE property_dataset_sample_enriched_time
+	SET "Note Date" = REPLACE(substr("Note Date", 1, 10), '/', '-')
+	WHERE "Note Date" LIKE '____%__%__%';
+	
+	
+	UPDATE property_dataset_sample_enriched_time
+	SET "First Payment Date" = REPLACE(substr("First Payment Date", 1, 10), '/', '-')
+	WHERE "First Payment Date" LIKE '____%__%__%';
+	
+	
+	UPDATE property_dataset_sample_enriched_time
+	SET "Maturity Date" = REPLACE(substr("Maturity Date", 1, 10), '/', '-')
+	WHERE "Maturity Date" LIKE '____%__%__%';
+	
+	
+	UPDATE property_dataset_sample_enriched_time
+	SET "Appraisal Valuation Date" = REPLACE(substr("Appraisal Valuation Date", 1, 10), '/', '-')
+	WHERE "Appraisal Valuation Date" LIKE '____%__%__%';
+	
+	
+	UPDATE property_dataset_sample_enriched_time
+	SET "Most Recent Financial End Date" = REPLACE(substr("Most Recent Financial End Date", 1, 10), '/', '-')
+	WHERE "Most Recent Financial End Date" LIKE '____%__%__%';
+	
+	
+	UPDATE property_dataset_sample_enriched_time
+	SET "2nd Most Recent Financial End Date" = REPLACE(substr("2nd Most Recent Financial End Date", 1, 10), '/', '-')
+	WHERE "2nd Most Recent Financial End Date" LIKE '____%__%__%';
+	
+	
+	UPDATE property_dataset_sample_enriched_time
+	SET "3rd Most Recent Financial End Date" = REPLACE(substr("3rd Most Recent Financial End Date", 1, 10), '/', '-')
+	WHERE "3rd Most Recent Financial End Date" LIKE '____%__%__%';
+	
+	
+	UPDATE property_dataset_sample_enriched_time
+	SET "First Interest Adjustment Date In Trust" = REPLACE(substr("First Interest Adjustment Date In Trust", 1, 10), '/', '-')
+	WHERE "First Interest Adjustment Date In Trust" LIKE '____%__%__%';
 
 #10 /*Checking removed hours*/
 
-SELECT *
-FROM property_dataset_sample_enriched_time
-WHERE
-    "Occupancy As Of Date" LIKE '____-__-__ __:__:%'
-    OR "Note Date" LIKE '____-__-__ __:__:%'
-    OR "First Payment Date" LIKE '____-__-__ __:__:%'
-    OR "Maturity Date" LIKE '____-__-__ __:__:%'
-    OR "Appraisal Valuation Date" LIKE '____-__-__ __:__:%'
-    OR "Most Recent Financial End Date" LIKE '____-__-__ __:__:%'
-    OR "2nd Most Recent Financial End Date" LIKE '____-__-__ __:__:%'
-    OR "3rd Most Recent Financial End Date" LIKE '____-__-__ __:__:%'
-    OR "First Interest Adjustment Date In Trust" LIKE '____-__-__ __:__:%';
+	SELECT *
+	FROM property_dataset_sample_enriched_time
+		WHERE
+    	"Occupancy As Of Date" LIKE '____-__-__ __:__:%'
+   		 OR "Note Date" LIKE '____-__-__ __:__:%'
+   		 OR "First Payment Date" LIKE '____-__-__ __:__:%'
+   		 OR "Maturity Date" LIKE '____-__-__ __:__:%'
+    	OR "Appraisal Valuation Date" LIKE '____-__-__ __:__:%'
+    	OR "Most Recent Financial End Date" LIKE '____-__-__ __:__:%'
+    	OR "2nd Most Recent Financial End Date" LIKE '____-__-__ __:__:%'
+    	OR "3rd Most Recent Financial End Date" LIKE '____-__-__ __:__:%'
+    	OR "First Interest Adjustment Date In Trust" LIKE '____-__-__ __:__:%';
 
 #11/* Riviera specific case, changing two date values that were not being executed*/
 
-UPDATE property_dataset_sample_enriched_time
-SET 
-    "Most Recent Financial End Date" = '2023/01/31',
-    "2nd Most Recent Financial End Date" = '2023/09/30'
-WHERE 
-    TRIM("Most Recent Financial End Date") LIKE '%1/31/2023%'
-    AND TRIM("2nd Most Recent Financial End Date") LIKE '%9/30/2022%'
+	UPDATE property_dataset_sample_enriched_time
+	SET 
+    	"Most Recent Financial End Date" = '2023/01/31',
+    	"2nd Most Recent Financial End Date" = '2023/09/30'
+	WHERE 
+    	TRIM("Most Recent Financial End Date") LIKE '%1/31/2023%'
+    	AND TRIM("2nd Most Recent Financial End Date") LIKE '%9/30/2022%'
 
 #12/*Summary statistics of most important numeric fields*/
-SELECT
-    COUNT(*) AS total_rows,
-
+	
+ 	SELECT
+    	COUNT(*) AS total_rows,	
     -- Cleaned NOI stats
     MIN(CAST("Most Recent NOI" AS REAL)) AS min_noi,
     MAX(CAST("Most Recent NOI" AS REAL)) AS max_noi,
@@ -317,20 +318,20 @@ SELECT
     AVG("Total Units") AS avg_units,
 
    
-   -- Year Built (cleaned)
-MIN(
+   	-- Year Built (cleaned)
+	MIN(
     CASE 
         WHEN "Year Built" GLOB '[0-9]*' THEN CAST("Year Built" AS INTEGER)
     END
-) AS min_year_built,
+	) AS min_year_built,
 
-MAX(
+	MAX(
     CASE 
         WHEN "Year Built" GLOB '[0-9]*' THEN CAST("Year Built" AS INTEGER)
     END
-) AS max_year_built,
+	) AS max_year_built,
 
-AVG(
+	AVG(
     CASE 
         WHEN "Year Built" GLOB '[0-9]*' THEN CAST("Year Built" AS INTEGER)
     END
@@ -351,18 +352,19 @@ AVG(
     MAX("Cut-Off Date Loan Amount") AS max_cutoff_loan,
     AVG("Cut-Off Date Loan Amount") AS avg_cutoff_loan
 
-FROM property_dataset_sample_enriched_time
-WHERE 
-  TRIM("Most Recent NOI") != '' 
-  AND "Most Recent NOI" IS NOT NULL
-  AND "Most Recent NOI" GLOB '[0-9.-]*';
+	FROM property_dataset_sample_enriched_time
+	WHERE 
+ 	 TRIM("Most Recent NOI") != '' 
+  	AND "Most Recent NOI" IS NOT NULL
+  	AND "Most Recent NOI" GLOB '[0-9.-]*';
 
 FROM property_dataset_sample_enriched_time;
 
-#12 Identifying nulls
+#12 Identifying nulls:
+	
 /* This query is used to overview columns and evaluate which columns may be dropped, kept or caclulated cleaning purposes*/
 
-SELECT
+	SELECT
     SUM(CASE WHEN TRIM("Number Of Properties") IS NULL OR TRIM("Number Of Properties") = '' THEN 1 ELSE 0 END) AS "Number Of Properties Nulls",
     SUM(CASE WHEN TRIM("Property Name") IS NULL OR TRIM("Property Name") = '' THEN 1 ELSE 0 END) AS "Property Name Nulls",
     SUM(CASE WHEN TRIM("Originator") IS NULL OR TRIM("Originator") = '' THEN 1 ELSE 0 END) AS "Originator Nulls",
@@ -547,61 +549,63 @@ From here exported CSV file to Power BI to clean and transform pending data and 
 
 
 
-#1 Imported the CSV file to Power BI desktop loaded the data, three steps wwere done from Power Bi Desktop:
+#1 Imported the CSV file to Power BI desktop loaded the data, three steps wwere done from Power Bi Desktop:=
+
 	a. Source: = Csv.Document(File.Contents("C:\Users\Martin\Documents\Endava\Time issue\Export\Property Dataset Sample Enriched Export.csv"),[Delimiter=",", Columns=157, Encoding=	1252, QuoteStyle=QuoteStyle.None])
 	b. Promoted headers:= Table.PromoteHeaders(Source, [PromoteAllScalars=true])
-	c. Table.TransformColumnTypes(#"Promoted Headers",{{"Number Of Properties", Int64.Type}, {"Property Name", type text}, {"Originator", type text}, {"Street Address", type text}, 	{"Property City", type text}, {"Property State", type text}, {"Zip Code", Int64.Type}, {"County", type text}, {"Property Type", type text}, {"Property Subtype", type text}, {"Year 	Built", Int64.Type}, {"Year Renovated", Int64.Type}, {"Total Units", Int64.Type}, {"Cut-off Date Balanceunit", type number}, {"Unit Of Measure", type text}, {"Occupancy %", type 	number}, {"Occupancy As Of Date", type date}, {"Loan Purpose (acquisition, Refinance)", type text}, {"Payment Date", Int64.Type}, {"Late Charge Grace Period", Int64.Type}, {"Note 	Date", type date}, {"First Payment Date", type date}, {"Maturity Date", type date}, {"Original Loan Amount", Int64.Type}, {"Cut-off Date Loan Amount", type number}, {"Maturity 	Balance", type number}, {"Gross Interest Rate", type number}, {"Net Mortgage Interest Rate", type number}, {"Accrual Basis", type text}, {"Loan Amortization Type", type text}, 	{"Monthly Debt Service Amount (amortizing)", type number}, {"Amortization Term (original)", Int64.Type}, {"Amortization Term (remaining)", Int64.Type}, {"Loan Term (original)", 	Int64.Type}, {"Loan Term (remaining)", Int64.Type}, {"Io Period", Int64.Type}, {"Seasoning", Int64.Type}, {"Prepayment Provision", type text}, {"Appraisal Valuation Date", type 	date}, {"Appraised Value", Int64.Type}, {"Cut-off Date Ltv", type number}, {"Maturity Ltv", type number}, {"Uw Ncf Dscr", type number}, {"Uw Ncf Dscr (io)", type number}, {"Uw 	Egi", type number}, {"Uw Expenses", type number}, {"Uw Noi", type number}, {"Uw Ncf", type number}, {"Most Recent Financial End Date", type date}, {"Most Recent Egi", type number}, 	{"Most Recent Expenses", type number}, {"Most Recent Noi", type number}, {"Most Recent Ncf", type number}, {"2nd Most Recent Financial End Date", type date}, {"2nd Most Recent 	Egi", type number}, {"2nd Most Recent Expenses", type number}, {"2nd Most Recent Noi", type number}, {"2nd Most Recent Ncf", type number}, {"3rd Most Recent Financial End Date", 	type date}, {"3rd Most Recent Egi", type number}, {"3rd Most Recent Expenses", type number}, {"3rd Most Recent Noi", type number}, {"3rd Most Recent Ncf", type number}, {"Lien 	Position", type text}, {"Title Vesting (feeleaseholdboth)", type text}, {"Tax Escrow (monthly)", type text}, {"Insurance Escrow (monthly)", type text}, {"Replacement Reserve 	(monthly)", type text}, {"Monthly Rent Per Unit", type number}, {"Secondary Financing In Place (existing) (yesno)", type text}, {"Future Supplemental Financing Description", type 	text}, {"Loan No Property No", type text}, {"Related Borrower Loans", type text}, {"% Of Cut-off Date Pool Balance", type number}, {"Springing Reserve Type", type text}, 	{"Springing Reserve Amount", type text}, {"Deal Name", type text}, {"Interest Adjustment Period (months)", Int64.Type}, {"First Interest Adjustment Date In Trust", type date}, 	{"Rate Index", type text}, {"Margin", type number}, {"Rate Rounding Methodology", type text}, {"Interest Accrual Period Day Of Month (startend)", type text}, {"Monthly Debt Service 	Amount (io)", type number}, {"Monthly Debt Service Amount (at Cap)", type number}, {"Seismic Insurance If Pml >= 20% (yesno)", type text}, {"Additional Financing In Place 	(existing) (yesno)", type text}, {"Future Supplemental Financing (yesno)", type text}, {"Low Income Units", type text}, {"Very Low Income Units", type text}, {"Loan Group", type 	text}, {"Entity Type", type text}, {"Borrower Type", type text}, {"Balance After Fixed Rate Period", type text}, {"Maximum Interest Adjustment (lifetime)", type text}, {"Zoning 	Status", type text}, {"Title Vesting (feeleasehold)", type text}, {"Administration Fee Rate", type number}, {"Latitude", type number}, {"Longitude", type number}, {"state_code", 	Int64.Type}, {"population_age_median", type number}, {"population_total_count", Int64.Type}, {"population_18yr_over_count", Int64.Type}, {"population_25yr_over_count", Int64.Type}, 	{"population_25yr_over_with_bachelor_degree_count", Int64.Type}, {"population_18_34yr_over_count", Int64.Type}, {"population_25_64yr_over_count", Int64.Type}, {"population_	65yr_over_count", Int64.Type}, {"population_bachelors_count", Int64.Type}, {"population_graduate_count", Int64.Type}, {"population_household_type_total_count", Int64.Type}, 	{"population_household_income_family_median", Int64.Type}, {"population_household_income_earnings_median", Int64.Type}, {"population_employment_total_count", Int64.Type}, 	{"population_employed_count", Int64.Type}, {"population_unemployed_count", Int64.Type}, {"housing_units_occupancy_status_total_count", Int64.Type}, {"housing_units_occupied_count", 	Int64.Type}, {"housing_units_vacant_count", Int64.Type}, {"housing_units_vacancy_status_total_count", Int64.Type}, {"housing_units_for_rent_count", Int64.Type}, 	{"housing_units_rented_count", Int64.Type}, {"housing_units_for_sale_count", Int64.Type}, {"housing_units_sold_count", Int64.Type}, {"number_of_rooms_median", type number}, 	{"number_of_units_total_count", Int64.Type}, {"construction_year_median", Int64.Type}, {"contract_rent_median", Int64.Type}, {"home_value_lower_quartile", Int64.Type}, 	{"home_value_median", Int64.Type}, {"home_value_upper_quartile", Int64.Type}, {"housing_units_mortgage_status_total_count", Int64.Type}, {"housing_cost_real_estate_taxes_median", 	Int64.Type}, {"housing_cost_monthly_median", Int64.Type}, {"gross_rent_median", Int64.Type}, {"household_income_median", Int64.Type}, {"household_income_mean", Int64.Type}, 	{"household_income_under_10k_count", Int64.Type}, {"household_income_10k_15k_count", Int64.Type}, {"household_income_15k_20k_count", Int64.Type}, {"household_income_20k_25k_count", 	Int64.Type}, {"household_income_25k_30k_count", Int64.Type}, {"household_income_30k_35k_count", Int64.Type}, {"household_income_35k_40k_count", Int64.Type}, {"household_income_40k_	45k_count", Int64.Type}, {"household_income_45k_50k_count", Int64.Type}, {"household_income_50k_60k_count", Int64.Type}, {"household_income_60k_75k_count", Int64.Type}, 	{"household_income_75k_100k_count", Int64.Type}, {"household_income_100k_125k_count", Int64.Type}, {"household_income_125k_150k_count", Int64.Type}, {"household_income_150k_	200k_count", Int64.Type}, {"household_income_200k_over_count", Int64.Type}, {"families_total_count", Int64.Type}, {"state_name", type text}, {"adm_1_code_letters", type text}})
+	c. 
+ 	Table.TransformColumnTypes(#"Promoted Headers",{{"Number Of Properties", Int64.Type}, {"Property Name", type text}, {"Originator", type text}, {"Street Address", type text}, 	{"Property City", type text}, 				{"Property State", type text}, {"Zip Code", Int64.Type}, {"County", type text}, {"Property Type", type text}, {"Property Subtype", type text}, {"Year 	Built", Int64.Type}, {"Year Renovated", Int64.Type}, {"Total 		Units", Int64.Type}, {"Cut-off Date Balanceunit", type number}, {"Unit Of Measure", type text}, {"Occupancy %", type 	number}, {"Occupancy As Of Date", type date}, {"Loan Purpose (acquisition, Refinance)", type text}, {"Payment Date", Int64.Type}, {"Late Charge Grace Period", Int64.Type}, {"Note 	Date", type date}, {"First Payment Date", type date}, {"Maturity Date", type date}, {"Original Loan Amount", Int64.Type}, {"Cut-off Date Loan Amount", type number}, {"Maturity 	Balance", type number}, {"Gross Interest Rate", type number}, {"Net Mortgage Interest Rate", type number}, {"Accrual Basis", type text}, {"Loan Amortization Type", type text}, 	{"Monthly Debt Service Amount (amortizing)", type number}, {"Amortization Term (original)", Int64.Type}, {"Amortization Term (remaining)", Int64.Type}, {"Loan Term (original)", 	Int64.Type}, {"Loan Term (remaining)", Int64.Type}, {"Io Period", Int64.Type}, {"Seasoning", Int64.Type}, {"Prepayment Provision", type text}, {"Appraisal Valuation Date", type 	date}, {"Appraised Value", Int64.Type}, {"Cut-off Date Ltv", type number}, {"Maturity Ltv", type number}, {"Uw Ncf Dscr", type number}, {"Uw Ncf Dscr (io)", type number}, {"Uw 	Egi", type number}, {"Uw Expenses", type number}, {"Uw Noi", type number}, {"Uw Ncf", type number}, {"Most Recent Financial End Date", type date}, {"Most Recent Egi", type number}, 	{"Most Recent Expenses", type number}, {"Most Recent Noi", type number}, {"Most Recent Ncf", type number}, {"2nd Most Recent Financial End Date", type date}, {"2nd Most Recent 	Egi", type number}, {"2nd Most Recent Expenses", type number}, {"2nd Most Recent Noi", type number}, {"2nd Most Recent Ncf", type number}, {"3rd Most Recent Financial End Date", 	type date}, {"3rd Most Recent Egi", type number}, {"3rd Most Recent Expenses", type number}, {"3rd Most Recent Noi", type number}, {"3rd Most Recent Ncf", type number}, {"Lien 	Position", type text}, {"Title Vesting (feeleaseholdboth)", type text}, {"Tax Escrow (monthly)", type text}, {"Insurance Escrow (monthly)", type text}, {"Replacement Reserve 	(monthly)", type text}, {"Monthly Rent Per Unit", type number}, {"Secondary Financing In Place (existing) (yesno)", type text}, {"Future Supplemental Financing Description", type 	text}, {"Loan No Property No", type text}, {"Related Borrower Loans", type text}, {"% Of Cut-off Date Pool Balance", type number}, {"Springing Reserve Type", type text}, 	{"Springing Reserve Amount", type text}, {"Deal Name", type text}, {"Interest Adjustment Period (months)", Int64.Type}, {"First Interest Adjustment Date In Trust", type date}, 	{"Rate Index", type text}, {"Margin", type number}, {"Rate Rounding Methodology", type text}, {"Interest Accrual Period Day Of Month (startend)", type text}, {"Monthly Debt Service 	Amount (io)", type number}, {"Monthly Debt Service Amount (at Cap)", type number}, {"Seismic Insurance If Pml >= 20% (yesno)", type text}, {"Additional Financing In Place 	(existing) (yesno)", type text}, {"Future Supplemental Financing (yesno)", type text}, {"Low Income Units", type text}, {"Very Low Income Units", type text}, {"Loan Group", type 	text}, {"Entity Type", type text}, {"Borrower Type", type text}, {"Balance After Fixed Rate Period", type text}, {"Maximum Interest Adjustment (lifetime)", type text}, {"Zoning 	Status", type text}, {"Title Vesting (feeleasehold)", type text}, {"Administration Fee Rate", type number}, {"Latitude", type number}, {"Longitude", type number}, {"state_code", 	Int64.Type}, {"population_age_median", type number}, {"population_total_count", Int64.Type}, {"population_18yr_over_count", Int64.Type}, {"population_25yr_over_count", Int64.Type}, 	{"population_25yr_over_with_bachelor_degree_count", Int64.Type}, {"population_18_34yr_over_count", Int64.Type}, {"population_25_64yr_over_count", Int64.Type}, {"population_	65yr_over_count", Int64.Type}, {"population_bachelors_count", Int64.Type}, {"population_graduate_count", Int64.Type}, {"population_household_type_total_count", Int64.Type}, 	{"population_household_income_family_median", Int64.Type}, {"population_household_income_earnings_median", Int64.Type}, {"population_employment_total_count", Int64.Type}, 	{"population_employed_count", Int64.Type}, {"population_unemployed_count", Int64.Type}, {"housing_units_occupancy_status_total_count", Int64.Type}, {"housing_units_occupied_count", 	Int64.Type}, {"housing_units_vacant_count", Int64.Type}, {"housing_units_vacancy_status_total_count", Int64.Type}, {"housing_units_for_rent_count", Int64.Type}, 	{"housing_units_rented_count", Int64.Type}, {"housing_units_for_sale_count", Int64.Type}, {"housing_units_sold_count", Int64.Type}, {"number_of_rooms_median", type number}, 	{"number_of_units_total_count", Int64.Type}, {"construction_year_median", Int64.Type}, {"contract_rent_median", Int64.Type}, {"home_value_lower_quartile", Int64.Type}, 	{"home_value_median", Int64.Type}, {"home_value_upper_quartile", Int64.Type}, {"housing_units_mortgage_status_total_count", Int64.Type}, {"housing_cost_real_estate_taxes_median", 	Int64.Type}, {"housing_cost_monthly_median", Int64.Type}, {"gross_rent_median", Int64.Type}, {"household_income_median", Int64.Type}, {"household_income_mean", Int64.Type}, 	{"household_income_under_10k_count", Int64.Type}, {"household_income_10k_15k_count", Int64.Type}, {"household_income_15k_20k_count", Int64.Type}, {"household_income_20k_25k_count", 	Int64.Type}, {"household_income_25k_30k_count", Int64.Type}, {"household_income_30k_35k_count", Int64.Type}, {"household_income_35k_40k_count", Int64.Type}, {"household_income_40k_	45k_count", Int64.Type}, {"household_income_45k_50k_count", Int64.Type}, {"household_income_50k_60k_count", Int64.Type}, {"household_income_60k_75k_count", Int64.Type}, 	{"household_income_75k_100k_count", Int64.Type}, {"household_income_100k_125k_count", Int64.Type}, {"household_income_125k_150k_count", Int64.Type}, {"household_income_150k_	200k_count", Int64.Type}, {"household_income_200k_over_count", Int64.Type}, {"families_total_count", Int64.Type}, {"state_name", type text}, {"adm_1_code_letters", type text}})
 
 #2.Replaced "Various" Value from year built column for Null, transforming the data before loading it to Power BI Desktop
 
-= Table.ReplaceErrorValues(#"Reordered Columns", {{"Year Built", null}})
+	= Table.ReplaceErrorValues(#"Reordered Columns", {{"Year Built", null}})
 
 #3. Rounded Cut-off Date Balance unit to two decimal points, transforming the data before loading it to Power BI Desktop
 
-= Table.TransformColumns(#"Replaced Errors",{{"Cut-off Date Balanceunit", each Number.Round(_, 2), type number}})
+	= Table.TransformColumns(#"Replaced Errors",{{"Cut-off Date Balanceunit", each Number.Round(_, 2), type number}})
 
 #4.Changed Occupancy %, Gross Interest Rate,Net Mortgage Interest Rate, Net Mortgage Interest Rate,Cut-off Date Ltv, Maturity Ltv, % Of Cut-off Date Pool Balance, and Administration Fee Rate from decimal to percentage, transforming the data before loading it to Power BI Desktop
 
-= Table.TransformColumnTypes(#"Rounded Off",{{"Occupancy %", Percentage.Type}, {"Gross Interest Rate", Percentage.Type}, {"Net Mortgage Interest Rate", Percentage.Type}, {"Cut-off Date Ltv", Percentage.Type}, {"Maturity Ltv", Percentage.Type}, {"% Of Cut-off Date Pool Balance", Percentage.Type}, {"Administration Fee Rate", Percentage.Type}})
+	= Table.TransformColumnTypes(#"Rounded Off",{{"Occupancy %", Percentage.Type}, {"Gross Interest Rate", Percentage.Type}, {"Net Mortgage Interest Rate", Percentage.Type}, {"Cut-off Date Ltv", Percentage.Type}, 	{"Maturity Ltv", Percentage.Type}, {"% Of Cut-off Date Pool Balance", Percentage.Type}, {"Administration Fee Rate", Percentage.Type}})
 
 #5. Rounded UW Expenses to two decimal points, transforming the data before loading it to Power BI Desktop
 
-= Table.TransformColumns(#"Sorted Rows",{{"Uw Expenses", each Number.Round(_, 2), type number}})
+	= Table.TransformColumns(#"Sorted Rows",{{"Uw Expenses", each Number.Round(_, 2), type number}})
 
 #6. Rounded UW Expenses to two decimal points, transforming the data before loading it to Power BI Desktop
 
-= Table.TransformColumns(#"Rounded Off1",{{"Uw Noi", each Number.Round(_, 2), type number}})
+	= Table.TransformColumns(#"Rounded Off1",{{"Uw Noi", each Number.Round(_, 2), type number}})
 
 #7. Created Cap Rate column in power query editor where Most Recent NOI/ Appraised Value, transforming the data before loading it to Power BI Desktop. This metric is used to estimate the potential return on a real estate investment property.
 
-= Table.AddColumn(#"Rounded Off4", "Cap Rate", each [Most Recent Noi]/[Appraised Value])
+	= Table.AddColumn(#"Rounded Off4", "Cap Rate", each [Most Recent Noi]/[Appraised Value])
 
 #8. Changed cap rate to percentage , transforming the data before loading it to Power BI Desktop
 
-= Table.TransformColumnTypes(#"Cap Rate Calculate",{{"Cap Rate", Percentage.Type}})
+	= Table.TransformColumnTypes(#"Cap Rate Calculate",{{"Cap Rate", Percentage.Type}})
 
 #9. Created Full Cut-off date ltv in Power BI column. Cut-off date ltv= cut-off date loan amount/appraised value
 
-= Table.AddColumn(#"Changed Type2", "Complete Cut-off date ltv", each [#"Cut-off Date Loan Amount"]/[Appraised Value]
+	= Table.AddColumn(#"Changed Type2", "Complete Cut-off date ltv", each [#"Cut-off Date Loan Amount"]/[Appraised Value]
 
-#10. Changed Full Cut-off date ltv to percentage , transforming the data before loading it to Power BI Desktop
+#10. Changed Full Cut-off date ltv to percentage , transforming the data before loading it to Power BI Desktop:
 
-= Table.TransformColumnTypes(#"Cap Rate Calculate",{{"Cap Rate", Percentage.Type}})
+	= Table.TransformColumnTypes(#"Cap Rate Calculate",{{"Cap Rate", Percentage.Type}})
 
 #11. Created Full maturity ltv in Power BI column. Since there is only one appraised value date, for the purpose of this excercise I will use the same. maturity ltv= maturity balance/appraised value
 
-= Table.AddColumn(#"Complete Cut-off date ltv", "Complete maturity ltv", each [Maturity Balance]/[Appraised Value])
+	= Table.AddColumn(#"Complete Cut-off date ltv", "Complete maturity ltv", each [Maturity Balance]/[Appraised Value])
 
 #12. Changed Full maturity ltv to percentage , transforming the data before loading it to Power BI Desktop
 
-= Table.TransformColumnTypes(#"Cap Rate Calculate",{{"Cap Rate", Percentage.Type}})
+	= Table.TransformColumnTypes(#"Cap Rate Calculate",{{"Cap Rate", Percentage.Type}})
 
 #9 Loaded data in Power BI
 
-#10 Calculate Cap Rate Ranking within each state, created new column on Table view and constructed the DAX formula, this metric ranks properties within each state by their Cap Rate, from highest to lowest. A lower rank means higher return potential compared to other properties in the same state.
+#10 Calculate Cap Rate Ranking within each state, created new column on Table view and constructed the DAX formula, this metric ranks properties within each state by their Cap Rate, from highest to lowest. A lower rank means higher return potential compared to other properties in the same state.:
 
-Cap Rate Rank = 
-RANKX(
+	Cap Rate Rank = 
+	RANKX(
     FILTER(
         ALL('Property Dataset Sample Enriched Export'),
         'Property Dataset Sample Enriched Export'[Property State] = EARLIER('Property Dataset Sample Enriched Export'[Property State])
@@ -613,14 +617,15 @@ RANKX(
 )
 
 #11 Calculate Rent % Difference from State Median Rent in DAX, created new column on Table view and constructed the DAX formula, this metric calculates how far above or below the property’s rent is compared to the median rent in its state.To assess pricing competitiveness, I calculated each property’s rent difference from the state median. This shows how over or underpriced the rent is in its local context a key signal for risk or opportunity.
+Rent % Difference from State Median Rent:
 
-Rent % Difference from State Median Rent = 
-DIVIDE(
-    'Property Dataset Sample Enriched Export'[Monthly Rent Per Unit] - 'Property Dataset Sample Enriched Export'[contract_rent_median],
-    'Property Dataset Sample Enriched Export'[contract_rent_median]
-)
+ 	DIVIDE(
+    	'Property Dataset Sample Enriched Export'[Monthly Rent Per Unit] - 'Property Dataset Sample Enriched Export'[contract_rent_median],
+    	'Property Dataset Sample Enriched Export'[contract_rent_median]
+		)
 
 #12 Calculate the Rent Affordability Ratio in DAX, created new column on Table view and constructed the DAX formula, this metric shows how much of a household’s income goes toward rent. The lower the number, the more affordable the rent.To assess housing burden, I calculated the Rent Affordability Ratio by comparing the property’s monthly rent to the state’s median monthly household income. This reveals how much of a typical household’s income would go toward rent. A lower ratio indicates higher affordability. I normalized all values to monthly terms to ensure consistency.
+
 	a. First Create Monthly Household Income column since the stat we have is indicated yearly
 		Monthly Household Income Median = 
 	DIVIDE(
@@ -660,7 +665,8 @@ DIVIDE(
     		)
 	)
 
-#14 Create the Property Occupancy Index (relative to state), this metric measures how occupied a property is relative to other properties in the same state. This will signal if the occupancy of a selected property is above or below state average.
+#14 Create the Property Occupancy Index (relative to state), this metric measures how occupied a property is relative to other properties in the same state. This will signal if the occupancy of a selected property is above or below state average:
+
 	a. First calculate the State's average occupancy rate 
 		State Avg Occupancy = 
 		CALCULATE(
@@ -729,18 +735,19 @@ MAX('Property Dataset Sample Enriched Export'[Cap Rate]
 
 #16. Proposal: Create a ROI mortgage adjusted metric that combines the property’s core earning strength (Cap Rate and Occupancy %) with two strategic adjustments for rent competitiveness and affordability. This ensures the metric reflects not only how profitable the property is, but also how it’s positioned in the market for sustainable performance. Then substracts leverage costs to have a realistic view when financing a property.
 
-ROI Mortgage Adjusted = 
-(
-    'Property Dataset Sample Enriched Export'[Cap Rate] *
-    'Property Dataset Sample Enriched Export'[Occupancy %] *
-    (1 + MIN(0.10, MAX(-0.10, - 'Property Dataset Sample Enriched Export'[Rent % Difference from State Median Rent]))) *
-    (1 + MIN(0.10, MAX(-0.10, 0.30 - 'Property Dataset Sample Enriched Export'[Rent Affordability Ratio])))
-)
--
-(
-    'Property Dataset Sample Enriched Export'[Net Mortgage Interest Rate] *
-    'Property Dataset Sample Enriched Export'[Complete Cut-off date ltv]
-)
+ROI Mortgage Adjusted :
+
+	(
+    	'Property Dataset Sample Enriched Export'[Cap Rate] *
+    	'Property Dataset Sample Enriched Export'[Occupancy %] *
+   	 (1 + MIN(0.10, MAX(-0.10, - 'Property Dataset Sample Enriched Export'[Rent % Difference from State Median Rent]))) *
+    	(1 + MIN(0.10, MAX(-0.10, 0.30 - 'Property Dataset Sample Enriched Export'[Rent Affordability Ratio])))
+	)
+	-
+	(
+   	 'Property Dataset Sample Enriched Export'[Net Mortgage Interest Rate] *
+   	 'Property Dataset Sample Enriched Export'[Complete Cut-off date ltv]
+	)
 
 I will divide the formula in 4 parts to explain the logic behind now:
 
@@ -776,7 +783,8 @@ I will divide the formula in 4 parts to explain the logic behind now:
 			(1 + adjustment) applies the result proportionally to the ROI.
 
 	d. Leverage applied:'Property Dataset Sample Enriched Export'[Net Mortgage Interest Rate] *'Property Dataset Sample Enriched Export'[Complete Cut-off date ltv]
-			This will apply the leverage costs substract at the end of the formula by calculating the product of the ltv and the Net mortgage interest rate. This 			way we can 	have a realistic view of a leveraged ROI
+			This will apply the leverage costs substract at the end of the formula by calculating the product of the ltv and the Net mortgage interest rate. 
+This way we can 	have a realistic view of a leveraged ROI
 
 This will ultimately point properties with strong income, high occupancy, competitive rent, good affordability, and discounting leverage costs to rise to the top. This analysis gives a fair view to stakeholders as to a leveraged perspective of the properties.
 
