@@ -1,5 +1,34 @@
-Welcome to the Readme for Martin Guerra's Skills challenge submission. This Readme will instruct the steps done for the whole skills challenge. The challenge will be divided in:
+Welcome to the Readme for Martin Guerra's Skills challenge submission. 
+**Purpose **  
+Identify high-potential opportunities by combining **Cap Rate**, **Occupancy**, **Rent Stress**, and **financing impact** (**ROI – Mortgage Adjusted**). Designed for executives and non-technical users.
 
+**Quick Start**  
+- Open the `.pbix` in **Power BI Desktop**.  
+- Pages: **Landing**, **Overview**, **Key Metrics**, **Glossary**.  
+- Use slicers 
+
+**Key Metrics (annual unless noted)**  
+- **Cap Rate** = NOI ÷ Appraised Value  
+- **Cap Rate Rank (State)** = rank within state (1 = highest)  
+- **Rent % Diff (vs State)** = (Monthly Rent − State Median Rent) ÷ State Median Rent  
+- **Rent Affordability Ratio** = Monthly Rent ÷ (Median Income ÷ 12)  
+- **Occupancy Δ vs State** = Occupancy% − State Avg Occupancy%  
+- **ROI – Operational** = Cap Rate × Occupancy × bounded rent/affordability multipliers (±10%)  
+- **ROI – Mortgage Adjusted** = ROI Operational − (Net Mortgage Rate × LTV)
+
+**Assumptions (concise)**  
+- **NOI is annual** (T-12 or annualized).  
+- Rent metrics are monthly **ratios** used as unitless multipliers; they do not change ROI’s annual basis.
+
+**Updates & Communication (short)**  
+- Scheduled refresh via Power BI Service; optional Power Automate notifications.  
+- Monthly reviews with stakeholders; iterate based on feedback (BABOK-style).
+
+---
+
+> **Detailed methodology, data prep, and analysis continue below** 
+
+This readme will instruct step by step as follows
 1. EDA using SQLite with Db Browser to explore data at first sight, join different tables and thus enrich dataset demographics, provide a clean export for data manipulation on PBI, format changes to dates, establish data standards, and identify Nulls and missing values.
 2. Export of enriched dataset with demographics. Built a glossary table in this dataset to have a glossary page in the report.
 2. Power BI DAX manipulation and formatting in order to calculate metrics as Cap Rate, Cap Rate Ranking (within each state), Rent % Difference from State Median Rent , Rent Affordability Ratio, Rent Affordability Percentile Rank (within state), Property Occupancy Index, ROI Operational performance, ROI Operational perforance, and ROI Mortgage adjusted, both metrics proposed and explained later on.
