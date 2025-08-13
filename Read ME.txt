@@ -640,6 +640,10 @@ DIVIDE(
 	'Property Dataset Sample Enriched Export'[occupancy %] 
 	- 'Property Dataset Sample Enriched Export'[State Avg Occupancy]
 
+
+From here I have proposed two metrics that can give further insights into the best return on invetment considering different metrics:
+
+
 #15 Proposal: Create an Operational Performance ROI metric that combines the property’s core earning strength (Cap Rate and Occupancy %) with two strategic adjustments for rent competitiveness and affordability. This ensures the metric reflects not only how profitable the property is, but also how it’s positioned in the market for sustainable performance. 
 
 Operational ROI =
@@ -739,7 +743,7 @@ I will divide the formula in 4 parts to explain the logic behind now:
 			(1 + adjustment) applies the result proportionally to the ROI.
 
 	d. Leverage applied:'Property Dataset Sample Enriched Export'[Net Mortgage Interest Rate] *'Property Dataset Sample Enriched Export'[Complete Cut-off date ltv]
-			This will apply the leverage costs substract at the end of the formula by calculating the product of the ltv and the Net mortgage interest rate. This way we can 			have a realistic view of a leveraged ROI
+			This will apply the leverage costs substract at the end of the formula by calculating the product of the ltv and the Net mortgage interest rate. This 			way we can 	have a realistic view of a leveraged ROI
 
 This will ultimately point properties with strong income, high occupancy, competitive rent, good affordability, and discounting leverage costs to rise to the top. This analysis gives a fair view to stakeholders as to a leveraged perspective of the properties.
 
