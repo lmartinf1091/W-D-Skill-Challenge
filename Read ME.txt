@@ -1,5 +1,17 @@
-SQL Scripts to submit
+Welcome to the Readme for Martin Guerra's Skills challenge submission. This Readme will instruct the steps done for the whole skills challenge. The challenge will be divided in:
 
+1. EDA using SQLite with Db Browser to explore data at first sight, join different tables and thus enrich dataset demographics, provide a clean export for data manipulation on PBI, format changes to dates, establish data standards, and identify Nulls and missing values.
+2. Export of enriched dataset with demographics. Built a glossary table in this dataset to have a glossary page in the report.
+2. Power BI DAX manipulation and formatting in order to calculate metrics as Cap Rate, Cap Rate Ranking (within each state), Rent % Difference from State Median Rent , Rent Affordability Ratio, Rent Affordability Percentile Rank (within state), Property Occupancy Index, ROI Operational performance, ROI Operational perforance, and ROI Mortgage adjusted, both metrics proposed and explained later on.
+4. Explanation of automation and regular updates
+5. Communication strategy findings to executives and non-technical stakeholders
+
+
+1. EDA
+
+
+
+SQL Scripts
 #1 /* View data in property_dataset_sample.csv*/
 
 SELECT 
@@ -494,8 +506,13 @@ Rent Affordability Percentile Rank (within state)
 
 From here exported CSV file to Power BI to clean and transform pending data and model
 
+2. Exported enriched dataset as an excel file and built a glossary page to feed into the last page of the report.
 
-Steps and code done
+
+3. Power BI and DAX calculations. I have calculated the majority of the metrics in DAX since it is my best understanding and reliable. The process of every single step is below.
+
+
+
 
 #1 Imported the CSV file to Power BI desktop loaded the data, three steps wwere done from Power Bi Desktop:
 	a. Source: = Csv.Document(File.Contents("C:\Users\Martin\Documents\Endava\Time issue\Export\Property Dataset Sample Enriched Export.csv"),[Delimiter=",", Columns=157, Encoding=	1252, QuoteStyle=QuoteStyle.None])
@@ -623,7 +640,7 @@ DIVIDE(
 	'Property Dataset Sample Enriched Export'[occupancy %] 
 	- 'Property Dataset Sample Enriched Export'[State Avg Occupancy]
 
-#15 Create an Operational Performance ROI metric that combines the property’s core earning strength (Cap Rate and Occupancy %) with two strategic adjustments for rent competitiveness and affordability. This ensures the metric reflects not only how profitable the property is, but also how it’s positioned in the market for sustainable performance. 
+#15 Proposal: Create an Operational Performance ROI metric that combines the property’s core earning strength (Cap Rate and Occupancy %) with two strategic adjustments for rent competitiveness and affordability. This ensures the metric reflects not only how profitable the property is, but also how it’s positioned in the market for sustainable performance. 
 
 Operational ROI =
 [Cap Rate] * [Occupancy %] *
@@ -672,3 +689,71 @@ MAX('Property Dataset Sample Enriched Export'[Cap Rate]
 * ( 1+ MIN( 0.10, MAX(-0.10,- 'Property Dataset Sample Enriched Export'[Rent % Difference from State Median Rent])))
 * ( 1+ MIN( 0.10, MAX(-0.10,0.30 - 'Property Dataset Sample Enriched Export'[Rent Affordability Ratio] ))
   )
+
+#16. Proposal: Create a ROI mortgage adjusted metric that combines the property’s core earning strength (Cap Rate and Occupancy %) with two strategic adjustments for rent competitiveness and affordability. This ensures the metric reflects not only how profitable the property is, but also how it’s positioned in the market for sustainable performance. Then substracts leverage costs to have a realistic view when financing a property.
+
+ROI Mortgage Adjusted = 
+(
+    'Property Dataset Sample Enriched Export'[Cap Rate] *
+    'Property Dataset Sample Enriched Export'[Occupancy %] *
+    (1 + MIN(0.10, MAX(-0.10, - 'Property Dataset Sample Enriched Export'[Rent % Difference from State Median Rent]))) *
+    (1 + MIN(0.10, MAX(-0.10, 0.30 - 'Property Dataset Sample Enriched Export'[Rent Affordability Ratio])))
+)
+-
+(
+    'Property Dataset Sample Enriched Export'[Net Mortgage Interest Rate] *
+    'Property Dataset Sample Enriched Export'[Complete Cut-off date ltv]
+)
+
+I will divide the formula in 4 parts to explain the logic behind now:
+
+	a. Base Performance: Cap Rate × Occupancy %
+
+		Cap Rate = Net Operating Income ÷ Property Value.
+		Occupancy % = proportion of units currently leased (stability measure).
+
+		Multiplying them scales profitability by actual utilization — a property with a high cap rate but low occupancy will score lower.
+
+	b. Market Competitiveness Adjustment: 1 + MIN(0.10, MAX(-0.10, - [Rent % Difference from State Median Rent])))
+
+			Rent % Difference from State Median Rent measures how far property rent deviates from the state median (positive = higher rent, negative = lower rent).
+
+			I invert the sign with - so that: Lower than median rents (negative differences) become positive boosts. Higher-than-median rents become negative penalties. MAX(-0.10, …) limits penalties so they don’t 				exceed -10%. MIN(0.10, …) limits boosts to +10%.
+
+			(1 + adjustment) makes it multiplicative, not additive:
+
+				+0.05 → ROI × 1.05 = 5% boost.
+
+				-0.07 → ROI × 0.93 = 7% reduction.
+
+	c. Affordability Adjustment: (1 + MIN(0.10, MAX(-0.10, 0.30 - [Rent Affordability Ratio])))
+			
+			Rent Affordability Ratio = Monthly Rent ÷ Median Monthly Household Income.
+
+			0.30 is the widely used affordability threshold (30% of income).
+
+			(0.30 - ratio) is positive when rents are more affordable (ratio below 30%), negative when less affordable.
+
+			Again, MAX(-0.10, …) and MIN(0.10, …) keep the effect within ±10%.
+
+			(1 + adjustment) applies the result proportionally to the ROI.
+
+	d. Leverage applied:'Property Dataset Sample Enriched Export'[Net Mortgage Interest Rate] *'Property Dataset Sample Enriched Export'[Complete Cut-off date ltv]
+			This will apply the leverage costs substract at the end of the formula by calculating the product of the ltv and the Net mortgage interest rate. This way we can 			have a realistic view of a leveraged ROI
+
+This will ultimately point properties with strong income, high occupancy, competitive rent, good affordability, and discounting leverage costs to rise to the top. This analysis gives a fair view to stakeholders as to a leveraged perspective of the properties.
+
+From here several visual aids were built with metrics, and a look and feel approach to Walker and Dunlop was built. 
+
+4. The dashboard will be kept current through a simple, warehouse-aligned workflow. A clean ETL process (dataflows or SQL views) will stage and standardize the portfolio data according to Walker & Dunlop conventions, and the published dataset in Power BI Service will run on a scheduled refresh (e.g., monthly), using certified connectors to the enterprise data warehouse. Where appropriate, incremental refresh can be enabled to speed updates.
+
+Automation will be orchestrated with Power BI Service and, if desired, Power Automate to trigger refreshes and send success/failure notifications. Basic data-quality checks (e.g., row counts and required fields like NOI/LTV) and a brief change log will be maintained to ensure trust. The result is a low-touch, reliable update cycle that keeps the dashboard usable and up-to-date without manual effort.
+
+5. This dashboard is designed to be intuitive and self-explanatory for non-technical audiences, using plain language, clear visuals, and concise on-screen definitions. In reviews with executives, we’ll lead with a short narrative of key movements and outliers, then allow guided exploration through simple filters and labeled KPIs so insights are immediately actionable.
+
+On a monthly cadence, we’ll present updates, briefly explain any metric changes, and gather feedback. Borrowing from BABOK practices, we’ll capture insights from multiple sources (reviews, comments, quick interviews) and iterate the dashboard to reflect evolving needs keeping the experience consistent while continuously improving clarity and decision usefulness. 
+
+
+
+
+
