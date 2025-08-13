@@ -526,11 +526,15 @@ FROM property_dataset_sample_enriched_time;
 
 Finalizing the SQL data cleanup, there are several metrics pending to calculate in Power BI:
 
-Cap Rate
-Cap Rate Ranking (within each state)
-Rent % Difference from State Median Rent 
-Rent Affordability Ratio
-Rent Affordability Percentile Rank (within state) 
+-Cap Rate
+
+-Cap Rate Ranking (within each state)
+
+-Rent % Difference from State Median Rent 
+
+-Rent Affordability Ratio
+
+-Rent Affordability Percentile Rank (within state) 
 
 
 From here exported CSV file to Power BI to clean and transform pending data and model
