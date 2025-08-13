@@ -16,11 +16,11 @@ Identify high-potential opportunities by combining **Cap Rate**, **Occupancy**, 
 - **ROI – Operational** = Cap Rate × Occupancy × bounded rent/affordability multipliers (±10%)  
 - **ROI – Mortgage Adjusted** = ROI Operational − (Net Mortgage Rate × LTV)
 
-**Assumptions (concise)**  
+**Assumptions**  
 - **NOI is annual** (T-12 or annualized).  
 - Rent metrics are monthly **ratios** used as unitless multipliers; they do not change ROI’s annual basis.
 
-**Updates & Communication (short)**  
+**Updates & Communication**  
 - Scheduled refresh via Power BI Service; optional Power Automate notifications.  
 - Monthly reviews with stakeholders; iterate based on feedback (BABOK-style).
 
